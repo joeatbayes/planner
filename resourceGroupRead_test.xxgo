@@ -1,0 +1,44 @@
+package planner_test
+
+import (
+	"fmt"
+	"testing"
+
+	//github.com/joeatbayes/portfolio-roadmap-planner/src/portfolio"
+	"portfolio"
+)
+
+// NOTE: When testing local change the "github.com//joeatbayes/portfolio-roadmap-planner/src/portfolio/"
+//  to "portfolio" to allow testing without pushing changes to git server.
+
+// OBSOLETE DUE TO BETTER TESTS IN THE PLANNER TEST //
+func TestResourceGroupRead(t *testing.T) {
+
+	fmt.Println("Test Loading Project Config")
+	cfgFiName := "data/examples/sample-01/config.xlsx"
+	resGrpFiName := "data/examples/sample-01/resources/main-teams.xlsx"
+
+	cfg := portfolio.LoadResourceConfig(cfgFiName)
+	if cfg == nil {
+		fmt.Println("Failed to load config file ", cfgFiName)
+		t.FailNow()
+	}
+
+	resGrps := portfolio.LoadResourceGroups(resGrpFiName, cfg)
+	if resGrps == nil {
+		fmt.Println("failed to load resource groups from file ", resGrpFiName)
+		t.FailNow()
+	}
+	//fmt.Println("resGrps=", resGrps.ToJSON(true))
+
+	//	if cfg.ResNeeds == nil {
+	//		fmt.Println("Resource needs was not initialized ", fiName)
+	//		t.FailNow()
+	//	}
+
+	//	if len(cfg.ResNeeds) < 7 {
+	//		fmt.Println("Resource needs found too few items based on test file", fiName)
+	//		t.FailNow()
+	//	}
+
+}

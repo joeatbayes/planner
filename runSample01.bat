@@ -1,0 +1,1 @@
+analyzePortfolio -config=data/examples/sample-01/config-sample-01.xlsx -resources=data/examples/sample-01/resources  -projects=data/examples/sample-01/projects -out=out/sample-1.xlsx

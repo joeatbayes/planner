@@ -1,0 +1,38 @@
+# Binaries for programs and plugins
+/*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.*-swp
+
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# excel work files 
+~$*
+
+# Do not save any the the built executables in the experiment directory
+experiments/*.executables
+# TODO: Figure out how to ignore executables for linux and mac
+
+src/github.com/*
+pkg
+
+t.t
+
+# Skip the generated output files
+out/*
+
+data/private/*
+data-x*
+experiment/*.exe
+experiment/excelize/*.exe
+experiment/fieldparser/*.exe
+*dd*
+*private.zip*
+private.zip

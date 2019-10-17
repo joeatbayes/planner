@@ -1,0 +1,63 @@
+package planner_test
+
+import (
+	"fmt"
+	"testing"
+
+	//github.com/joeatbayes/portfolio-roadmap-planner/src/portfolio"
+	"portfolio"
+)
+
+// NOTE: When testing local change the "github.com//joeatbayes/portfolio-roadmap-planner/src/portfolio/"
+//  to "portfolio" to allow testing without pushing changes to git server.
+
+func TestConfigRead(t *testing.T) {
+
+	fmt.Println("Test Loading Config")
+	fiName := "data/examples/sample-01/config-sample-01.xlsx"
+	cfg := portfolio.LoadConfig(fiName)
+	if cfg == nil {
+		fmt.Println("Failed to load config file ", fiName)
+		t.FailNow()
+	}
+	fmt.Println("cfg=", cfg.ToJSON(true))
+
+	if cfg.Proj == nil {
+		fmt.Println("Fail project Config can not be nil based on expected test data", fiName)
+		t.FailNow()
+	}
+
+	if cfg.Res == nil {
+		fmt.Println("Fail Resource Config can not be nil based on expected test data", fiName)
+		t.FailNow()
+	}
+
+	if cfg.Proj.SheetNames[0] != "projects" {
+		fmt.Println("Failed to read sheetName expected based on test file ", fiName)
+		t.FailNow()
+	}
+
+	if cfg.Proj.ResNeeds == nil {
+		fmt.Println("Resource needs was not initialized ", fiName)
+		t.FailNow()
+	}
+
+	if len(cfg.Proj.ResNeeds) < 7 {
+		fmt.Println("Resource needs found too few items based on test file", fiName)
+		t.FailNow()
+	}
+
+	if cfg.Res.SheetNames[0] != "resources" {
+		fmt.Println("Failed correct sheetname (resources) from expected test config file.  fiName=", fiName)
+		t.FailNow()
+	}
+
+	fmt.Println("Test Loading Resource Config")
+	resCfg := portfolio.LoadResourceConfig(fiName)
+	fmt.Println("resourceCfg=", resCfg.ToJSON(true))
+	if resCfg.SheetNames[0] != "resources" {
+		fmt.Println("Resource config sheetNames is incorrect based on expected sample file ", fiName)
+		t.FailNow()
+	}
+
+}
